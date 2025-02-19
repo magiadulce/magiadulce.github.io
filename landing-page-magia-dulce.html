@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magia Dulce - Pastelería Artesanal</title>
+    <style>
+        :root {
+            --magenta-primary: #ff0080;
+            --magenta-light: #ff66b3;
+            --magenta-dark: #cc0066;
+            --white: #ffffff;
+            --light-gray: #f8f8f8;
+            --dark-gray: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .logo-text {
+            margin-left: 15px;
+        }
+        
+        .logo-text h1 {
+            color: var(--magenta-primary);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            color: var(--dark-gray);
+            font-style: italic;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            padding: 0 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--magenta-primary);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/api/placeholder/1920/1080') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            color: var(--magenta-primary);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--magenta-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--magenta-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.3);
+        }
+        
+        section {
+            padding: 80px 10%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--magenta-primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--magenta-primary);
+        }
+        
+        /* Productos */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 0, 128, 0.2);
+        }
+        
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            font-size: 22px;
+            color: var(--magenta-primary);
+            margin-bottom: 10px;
+        }
+        
+        .product-info p {
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+        
+        /* Galería */
+        .gallery {
+            background-color: var(--light-gray);
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Sabores */
+        .flavors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .flavor-card {
+            background-color: var(--white);
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .flavor-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--magenta-light);
+            color: var(--white);
+        }
+        
+        .flavor-icon {
+            font-size: 40px;
+            color: var(--magenta-primary);
+            margin-bottom: 15px;
+        }
+        
+        .flavor-card:hover .flavor-icon {
+            color: var(--white);
+        }
+        
+        .flavor-card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        /* Contacto */
+        .contact {
+            background: linear-gradient(to right, var(--magenta-primary), var(--magenta-light));
+            color: var(--white);
+        }
+        
+        .contact .section-title h2 {
+            color: var(--white);
+        }
+        
+        .contact .section-title h2::after {
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        textarea.form-control {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 40px 10%;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--magenta-primary);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            section {
+                padding: 60px 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-text">
+                    <h1>Magia Dulce</h1>
+                    <p>La combinación perfecta entre diseño y sabor</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#sabores">Sabores</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Magia Dulce</h2>
+            <p>La pastelería es la magia de crear algo hermoso con ingredientes básicos</p>
+            <p><strong>La combinación perfecta entre diseño y sabor</strong></p>
+            <a href="#contacto" class="btn">¡Haz tu pedido ahora!</a>
+        </div>
+    </section>
+
+    <!-- Sección de Productos -->
+    <section id="productos">
+        <div class="section-title">
+            <h2>Nuestros Productos</h2>
+            <p>Creaciones artesanales con el mejor sabor</p>
+        </div>
+        <div class="products-container">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="/api/placeholder/400/300" alt="Tortas personalizadas">
+                </div>
+                <div class="product-info">
+                    <h3>Tortas Personalizadas</h3>
+                    <p>Diseños únicos para cada ocasión especial. Trabajamos cada detalle para hacer realidad tus ideas.</p>
+                    <a href="#contacto" class="btn">Cotizar</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="/api/placeholder/400/300" alt="Desayunos sorpresa">
+                </div>
+                <div class="product-info">
+                    <h3>Desayunos Personalizados</h3>
+                    <p>Sorprende a tus seres queridos con un desayuno especial lleno de detalles mágicos.</p>
+                    <a href="#contacto" class="btn">Cotizar</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="/api/placeholder/400/300" alt="Galletas decoradas">
+                </div>
+                <div class="product-info">
+                    <h3>Galletas Decoradas</h3>
+                    <p>Pequeñas obras de arte con el balance perfecto entre sabor y estética.</p>
+                    <a href="#contacto" class="btn">Cotizar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Fotos -->
+    <section id="galeria" class="gallery">
+        <div class="section-title">
+            <h2>Nuestra Galería</h2>
+            <p>Algunas de nuestras creaciones mágicas</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/400" alt="Pastel 1">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/400" alt="Pastel 2">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/400" alt="Pastel 3">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/400" alt="Galletas">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/400" alt="Cupcakes">
+            </div>
+            <div class="gallery-item">
+                <img src="/api/placeholder/400/400" alt="Desayuno">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Sabores -->
+    <section id="sabores">
+        <div class="section-title">
+            <h2>Nuestros Sabores</h2>
+            <p>Explosión de sabores que enamorarán tu paladar</p>
+        </div>
+        <div class="flavors-container">
+            <div class="flavor-card">
+                <div class="flavor-icon">🍫</div>
+                <h3>Chocolate</h3>
+                <p>Intenso sabor a chocolate belga premium</p>
+            </div>
+            <div class="flavor-card">
+                <div class="flavor-icon">🍓</div>
+                <h3>Fresas</h3>
+                <p>Fresas frescas con crema y biscocho esponjoso</p>
+            </div>
+            <div class="flavor-card">
+                <div class="flavor-icon">🍋</div>
+                <h3>Limón</h3>
+                <p>Refrescante sabor cítrico con merengue italiano</p>
+            </div>
+            <div class="flavor-card">
+                <div class="flavor-icon">🥥</div>
+                <h3>Coco</h3>
+                <p>Exótico sabor a coco con dulce de leche</p>
+            </div>
+            <div class="flavor-card">
+                <div class="flavor-icon">🍦</div>
+                <h3>Vainilla</h3>
+                <p>Clásico sabor con vainilla de Madagascar</p>
+            </div>
+            <div class="flavor-card">
+                <div class="flavor-icon">☕</div>
+                <h3>Café</h3>
+                <p>Aromático con notas de café gourmet</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="contact">
+        <div class="section-title">
+            <h2>Contáctanos</h2>
+            <p>¡Hagamos realidad tu dulce idea!</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>+123 456 7890</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <div>
+                        <h3>Email</h3>
+                        <p>info@magiadulce.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Calle Dulzura #123, Ciudad Encantada</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">⏰</span>
+                    <div>
+                        <h3>Horario</h3>
+                        <p>Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+                        <p>Domingo: 10:00 AM - 3:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Envíanos un mensaje</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <h2>Magia Dulce</h2>
+            <p>La combinación perfecta entre diseño y sabor</p>
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-link">FB</a>
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">WA</a>
+            <a href="#" class="social-link">TW</a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Magia Dulce - Todos los derechos reservados</p>
+        </div>
+    </footer>
+</body>
+</html>
